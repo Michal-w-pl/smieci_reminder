@@ -1,0 +1,27 @@
+name: Przypomnienie o wywozi śmieci 🗑️
+
+on:
+  schedule:
+    # Codziennie o 7:00 rano czasu polskiego (UTC+2 latem = 05:00 UTC)
+    - cron: '0 5 * * *'
+  workflow_dispatch:  # pozwala uruchomić ręcznie z GitHub (do testów)
+
+jobs:
+  wyslij-przypomnienie:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Uruchom skrypt
+        env:
+          EMAIL_NADAWCY:   ${{ secrets.EMAIL_NADAWCY }}
+          HASLO_APLIKACJI: ${{ secrets.HASLO_APLIKACJI }}
+          EMAIL_ODBIORCY:  ${{ secrets.EMAIL_ODBIORCY }}
+        run: python smieci_reminder.py
