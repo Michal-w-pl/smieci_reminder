@@ -24,4 +24,4 @@ jobs:
           EMAIL_NADAWCY:   ${{ secrets.EMAIL_NADAWCY }}
           HASLO_APLIKACJI: ${{ secrets.HASLO_APLIKACJI }}
           EMAIL_ODBIORCY:  ${{ secrets.EMAIL_ODBIORCY }}
-        run: python smieci_reminder.py
+        run: python smieci_reminder.py --test
